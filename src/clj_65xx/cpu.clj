@@ -101,16 +101,11 @@
 
 ;;; processor status flags
 
-(defn zero-flag?
-  "Check if result is 0."
-  [x]
-  (= x 0))
-
-(defn overflow-flag?
+(defn overflow?
   [x]
   (not (<= 0 x 0xff)))
 
-(defn negative-flag?
+(defn negative?
   [x]
   (bit-test x 7))
 
@@ -129,15 +124,15 @@
 
 (defn zero-flag
   [cpu n]
-  (set-flag cpu :zero (zero-flag? n)))
+  (set-flag cpu :zero (zero? n)))
 
 (defn overflow-flag
   [cpu n]
-  (set-flag cpu :overflow (overflow-flag? n)))
+  (set-flag cpu :overflow (overflow? n)))
 
 (defn negative-flag
   [cpu n]
-  (set-flag cpu :negative (negative-flag? n)))
+  (set-flag cpu :negative (negative? n)))
 
 ;;;; stack
 

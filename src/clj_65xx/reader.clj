@@ -16,9 +16,10 @@
         [op-f addr-mode] (opcode-map op)]
     (if op-f
       (let [[am-f am-len] (address-modes addr-mode)
-            addr-result (am-f cpu)
-            next-cpu (-> (op-f cpu addr-mode addr-result)
-                         (set-pc (+ (:pc r) 1 am-len)))]
-        (print-current-op (:pc r) op op-f addr-mode am-len addr-result)
-        next-cpu)
+            addr-result (am-f cpu)]
+        (print-current-op (:pc r) op op-f
+                          addr-mode am-len
+                          addr-result)
+        (let [next-cpu (op-f cpu addr-mode addr-result)]
+          (set-pc next-cpu (+ (:pc r) 1 am-len))))
       (throw (Exception. (str "Opcode " op " has no mapping."))))))

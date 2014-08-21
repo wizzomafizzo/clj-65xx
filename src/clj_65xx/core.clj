@@ -4,7 +4,9 @@
         clj-65xx.instructions
         clj-65xx.reader)
   (:require [clojure.java.io :refer [file input-stream]])
-  (:gen-class))
+  (:gen-class)) ;; FIXME: do i need this?
+
+;; TODO: change all :use to :require
 
 (def test-app
   [0xa9 0x01 0x8d 0x00 0x02 0xa9 0x05 0x8d 0x01 0x02 0xa9 0x08 0x8d 0x02 0x02])
